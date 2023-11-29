@@ -1,0 +1,547 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+@import '../abstracts/extends';
+@import '../base/normalize.scss';
+
+body {
+  width: $desktop;
+  font-family: $font;
+  color: $secondary;
+
+  margin: 0 auto 40px;
+  background-color: $light-pink;
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+  }
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  @media screen and (max-width: $tablet) {
+    max-width: $tablet - 80px;
+  }
+  @media screen and (max-width: $mobile) {
+    max-width: $mobile - 32px;
+  }
+}
+
+/* ---------------------------Header----------------------------- */
+header {
+  margin: 20px 0;
+
+  .burger,
+  .popup {
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet) {
+    nav {
+      display: none;
+    }
+
+    .burger {
+      display: block;
+      @include flex-column;
+      justify-content: center;
+      gap: 8px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid $light-grey;
+
+      span {
+        width: 16px;
+        height: 1.5px;
+        background-color: $grey;
+      }
+    }
+
+    .coffee__menu {
+      display: none;
+    }
+    img {
+      height: 60px;
+    }
+
+    .popup {
+      display: block;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      visibility: hidden;
+      background-color: rgb(236, 221, 189);
+
+      transition: all 0.2s;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      transition: all linear 0.4s;
+      &:target {
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto;
+      }
+
+      &__header {
+        @include flex(space-between, center);
+        padding: 20px 40px 0;
+        @media screen and (max-width: $mobile) {
+          padding: 20px 16px 0;
+        }
+      }
+
+      &__content {
+        @include flex-column;
+        list-style-type: none;
+        margin: 80px 40px auto;
+        gap: 60px;
+
+        .menu__item-link {
+          font-size: 2rem;
+
+          &:last-child {
+            @include flex(center, center);
+          }
+          img {
+            margin-left: 16px;
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+nav {
+  padding: 16px 0;
+}
+
+.header__menu {
+  @include flex(space-between, center);
+  &-list {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .menu__item-link {
+    color: $grey;
+    font-weight: $bold;
+    font-size: 1rem;
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      @include after-link-underline;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .burger_close {
+    position: relative;
+    span {
+      position: absolute;
+    }
+    span:first-child {
+      transform: rotate(45deg);
+      top: calc(50% - 0.75px);
+    }
+
+    span:last-child {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.coffee__menu-link {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: auto;
+  color: $grey;
+  font-weight: $bold;
+  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+
+  &::after {
+    @include after-link-underline;
+    opacity: 1;
+    transform: scale(1)
+  }
+}
+
+/* ---------------------------/Header----------------------------- */
+
+/* ---------------------------Offer----------------------------- */
+
+.offer__block {
+  @include flex-column;
+  padding: 0;
+  margin-bottom: $undertitle-margin;
+
+  justify-content: space-between;
+  color: $grey;
+
+  &-title {
+    @extend %section-title;
+    width: 800px;
+    margin: 0 280px 40px;
+    line-height: 1.2;
+
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+      margin: 0 40px 45px;
+    }
+
+    @media screen and (max-width: $mobile) {
+      font-size: 2rem;
+      line-height: 1.25;
+      margin: 0 40px 37px;
+    }
+    span {
+      font-style: italic;
+      color: $secondary;
+    }
+  }
+}
+
+.offer__tabs {
+  display: flex;
+  gap: 16px;
+  width: 360px;
+}
+
+.offer__btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 8px;
+  background-color: transparent;
+  border: 1px solid $dark-white;
+  border-radius: 100px;
+  font-family: 'Inter';
+  color: $grey;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  &-img {
+    @include flex(center, center);
+    background-color: $dark-white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    transition: all 0.2s linear;
+
+    &:hover {
+      background-color: $light-pink;
+    }
+  }
+}
+
+.offer__btn:hover {
+  background-color: $light-grey;
+  color: $light-pink;
+}
+
+/* ---------------------------/Offer----------------------------- */
+
+/* ---------------------------Menu----------------------------- */
+
+.menu {
+  margin-bottom: 100px;
+  &__grid {
+    display: none;
+
+    &:target {
+      display: grid;
+      grid-template-columns: repeat(4, 310px);
+      grid-template-rows: repeat(2, 506px);
+      gap: 40px;
+
+      @media screen and (max-width: $tablet) {
+        grid-template-columns: repeat(2, 310px);
+        padding: 0 15px;
+      }
+
+      @media screen and (max-width: $mobile) {
+        grid-template-columns: 310px;
+        padding: 0 17.5px;
+      }
+    }
+  }
+
+  &__refresh {
+    display: none;
+  }
+
+  &__grid-item {
+    border: 1px solid $dark-white;
+    border-radius: 40px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    &__grid-item:nth-child(5),
+    &__grid-item:nth-child(6),
+    &__grid-item:nth-child(7),
+    &__grid-item:nth-child(8) {
+      display: none;
+    }
+
+    &__refresh {
+      @include flex(center, center);
+      margin: 40px auto 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid $light-grey;
+      cursor: pointer;
+    }
+  }
+}
+
+#tea {
+  grid-template-rows: 506px;
+}
+
+.grid__item {
+  border-radius: 40px;
+  border: 1px solid $dark-white;
+
+  &-img {
+    height: 309px;
+
+    border-radius: 40px;
+    cursor: pointer;
+    background: center no-repeat;
+    background-size: 110%;
+    transition: background-size 0.5s linear;
+
+    &:hover {
+      background-size: 100%;
+    }
+  }
+
+  &-discription {
+    margin: 20px;
+    gap: 12px;
+    color: $grey;
+    display: grid;
+    grid-template-rows: 30px 2fr 30px;
+    height: 157px;
+  }
+
+  &-title,
+  &-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 125%;
+  }
+
+  &-content {
+    font-size: 1rem;
+    line-height: 150%;
+  }
+}
+
+.grid__item-img_1 {
+  background-image: url(../../img/menu/menu/coffee-1.jpg);
+}
+.grid__item-img_2 {
+  background-image: url(../../img/menu/menu/coffee-2.jpg);
+}
+.grid__item-img_3 {
+  background-image: url(../../img/menu/menu/coffee-3.jpg);
+}
+.grid__item-img_4 {
+  background-image: url(../../img/menu/menu/coffee-4.jpg);
+}
+.grid__item-img_5 {
+  background-image: url(../../img/menu/menu/coffee-5.jpg);
+}
+.grid__item-img_6 {
+  background-image: url(../../img/menu/menu/coffee-6.jpg);
+}
+.grid__item-img_7 {
+  background-image: url(../../img/menu/menu/coffee-7.jpg);
+}
+.grid__item-img_8 {
+  background-image: url(../../img/menu/menu/coffee-8.jpg);
+}
+.grid__item-img_9 {
+  background-image: url(../../img/menu/menu/tea-1.png);
+}
+.grid__item-img_10 {
+  background-image: url(../../img/menu/menu/tea-2.png);
+}
+.grid__item-img_11 {
+  background-image: url(../../img/menu/menu/tea-3.png);
+}
+.grid__item-img_12 {
+  background-image: url(../../img/menu/menu/tea-4.png);
+}
+
+.grid__item-img_13 {
+  background-image: url(../../img/menu/menu/dessert-1.png);
+}
+.grid__item-img_14 {
+  background-image: url(../../img/menu/menu/dessert-2.png);
+}
+.grid__item-img_15 {
+  background-image: url(../../img/menu/menu/dessert-3.png);
+}
+.grid__item-img_16 {
+  background-image: url(../../img/menu/menu/dessert-4.png);
+}
+.grid__item-img_17 {
+  background-image: url(../../img/menu/menu/dessert-5.png);
+}
+.grid__item-img_18 {
+  background-image: url(../../img/menu/menu/dessert-6.png);
+}
+.grid__item-img_19 {
+  background-image: url(../../img/menu/menu/dessert-7.png);
+}
+.grid__item-img_20 {
+  background-image: url(../../img/menu/menu/dessert-8.png);
+}
+
+/* ---------------------------/Menu----------------------------- */
+
+/* ---------------------------Footer----------------------------- */
+.footer {
+  &__inner {
+    @include flex(flex-start, center);
+    background-color: $light-grey;
+    border-radius: 40px;
+    height: 450px;
+    padding: 100px;
+
+    gap: 100px;
+
+    @media screen and (max-width: $tablet) {
+      @include flex-column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 100px 60px;
+      height: 100%;
+    }
+    @media screen and (max-width: $mobile) {
+      padding: 60px 15px;
+      gap: 35px;
+    }
+  }
+
+  &__slogan {
+    width: 50%;
+
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    @extend %section-title;
+    text-align: left;
+
+    span {
+      font-style: italic;
+      margin-bottom: 40px;
+      color: $secondary;
+    }
+
+    @media screen and (max-width: $tablet) {
+      font-size: 3.75rem;
+    }
+    @media screen and (max-width: $mobile) {
+      font-size: 2rem;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 12px;
+
+    &-item {
+      @include flex(center, center);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid $dark-white;
+      transition: all 0.2s linear;
+
+      path {
+        transition: all 0.2s linear;
+      }
+
+      &:hover {
+        background-color: $light-pink;
+      }
+    }
+  }
+
+  &__contacts {
+    width: 50%;
+
+    &-title {
+      @extend %section-title;
+      font-size: 1.5rem;
+      color: $light-pink;
+      text-align: left;
+    }
+
+    &-list {
+      @include flex-column;
+      align-items: flex-start;
+      list-style: none;
+      gap: 18px;
+    }
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+}
+
+.footer__social-item:hover path {
+  stroke: #403f3d;
+}
+
+.contact-link {
+  gap: 8px;
+  text-decoration: none;
+  color: $light-pink;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 150%;
+  position: relative;
+  transition: all 0.2s linear;
+
+  &::after {
+    @include after-link-underline();
+    background-color: $light-pink;
+    bottom: -3px;
+  }
+}
+
+.contact-link:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------------------------/Footer----------------------------- */

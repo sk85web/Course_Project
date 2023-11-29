@@ -1,0 +1,38 @@
+header {
+  margin: 20px 0;
+  nav {
+    padding: 16px 0;
+  }
+}
+
+.header__menu {
+  @include flex(space-between, center);
+  &-list {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .menu__item-link,
+  .coffee__menu-link {
+    color: $grey;
+    font-weight: $bold;
+    font-size: 1rem;
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      @include after-link-underline;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  .coffee__menu {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
