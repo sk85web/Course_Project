@@ -33,7 +33,11 @@ body {
 
 /* ---------------------------Header----------------------------- */
 header {
-  margin: 20px 0;
+  margin: 18px 0;
+
+  nav {
+    padding: 16px 0;
+  }
 
   .burger,
   .popup {
@@ -76,7 +80,7 @@ header {
       width: 100%;
       height: 100%;
       visibility: hidden;
-      background-color: rgb(236, 221, 189);
+      background-color: $light-pink;
 
       transition: all 0.2s;
       position: fixed;
@@ -93,6 +97,7 @@ header {
       &__header {
         @include flex(space-between, center);
         padding: 20px 40px 0;
+
         @media screen and (max-width: $mobile) {
           padding: 20px 16px 0;
         }
@@ -121,9 +126,6 @@ header {
   }
 }
 
-nav {
-  padding: 16px 0;
-}
 
 .header__menu {
   @include flex(space-between, center);
@@ -134,6 +136,7 @@ nav {
   }
 
   .menu__item-link {
+    padding-bottom: 4px;
     color: $grey;
     font-weight: $bold;
     font-size: 1rem;
@@ -167,6 +170,7 @@ nav {
 }
 
 .coffee__menu-link {
+  padding-bottom: 4px;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -184,6 +188,7 @@ nav {
   }
 }
 
+
 /* ---------------------------/Header----------------------------- */
 
 /* ---------------------------Offer----------------------------- */
@@ -198,19 +203,17 @@ nav {
 
   &-title {
     @extend %section-title;
-    width: 800px;
     margin: 0 280px 40px;
-    line-height: 1.2;
+    line-height: 125%;
 
     @media screen and (max-width: $tablet) {
       width: 100%;
-      margin: 0 40px 45px;
+      margin: 0 0 37px;
     }
 
     @media screen and (max-width: $mobile) {
       font-size: 2rem;
       line-height: 1.25;
-      margin: 0 40px 37px;
     }
     span {
       font-style: italic;
@@ -222,7 +225,16 @@ nav {
 .offer__tabs {
   display: flex;
   gap: 16px;
-  width: 360px;
+
+  .active 
+     {
+    background-color: $light-grey;
+    color: $light-pink;
+
+    .offer__btn-img {
+      background-color: $light-pink;
+    }
+    }
 }
 
 .offer__btn {
@@ -249,16 +261,22 @@ nav {
 
     transition: all 0.2s linear;
 
-    &:hover {
+  }
+
+  &:hover  {
+    background-color: $light-grey;
+    color: $light-pink;
+  
+    
+    .offer__btn-img {
       background-color: $light-pink;
     }
   }
+
+  
+
 }
 
-.offer__btn:hover {
-  background-color: $light-grey;
-  color: $light-pink;
-}
 
 /* ---------------------------/Offer----------------------------- */
 
@@ -284,6 +302,12 @@ nav {
         grid-template-columns: 310px;
         padding: 0 17.5px;
       }
+
+      .offer__btn
+     {
+    background-color: $light-grey;
+    color: $light-pink;
+    }
     }
   }
 
@@ -294,6 +318,12 @@ nav {
   &__grid-item {
     border: 1px solid $dark-white;
     border-radius: 40px;
+
+    &:hover {
+      .grid__item-img {
+        background-size: 100%;
+      }
+    }
   }
 
   @media screen and (max-width: $tablet) {
@@ -333,9 +363,6 @@ nav {
     background-size: 110%;
     transition: background-size 0.5s linear;
 
-    &:hover {
-      background-size: 100%;
-    }
   }
 
   &-discription {
@@ -459,6 +486,7 @@ nav {
   &__title {
     @extend %section-title;
     text-align: left;
+    color: $light-pink;
 
     span {
       font-style: italic;
@@ -510,7 +538,7 @@ nav {
       @include flex-column;
       align-items: flex-start;
       list-style: none;
-      gap: 18px;
+      gap: 15px;
     }
     @media screen and (max-width: $tablet) {
       width: 100%;
@@ -523,11 +551,13 @@ nav {
 }
 
 .contact-link {
+  display: flex;
+  padding-bottom: 4px;
   gap: 8px;
   text-decoration: none;
   color: $light-pink;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: $bold;
   line-height: 150%;
   position: relative;
   transition: all 0.2s linear;
@@ -535,13 +565,13 @@ nav {
   &::after {
     @include after-link-underline();
     background-color: $light-pink;
-    bottom: -3px;
   }
 }
 
-.contact-link:hover::after {
+.contact-link:not(.contact-link-span):hover::after {
   opacity: 1;
   transform: scale(1);
 }
+
 
 /* ---------------------------/Footer----------------------------- */
