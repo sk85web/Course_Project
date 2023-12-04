@@ -616,7 +616,7 @@ header {
     }
     @media screen and (max-width: $mobile) {
       padding: 60px 15px;
-      gap: 42px;
+      gap: 35px;
     }
   }
 
@@ -683,7 +683,7 @@ header {
       @include flex-column;
       align-items: flex-start;
       list-style: none;
-      gap: 18px;
+      gap: 15px;
     }
     @media screen and (max-width: $tablet) {
       width: 100%;
@@ -696,6 +696,7 @@ header {
 }
 
 .contact-link {
+  display: flex;
   padding-bottom: 4px;
   gap: 8px;
   text-decoration: none;
